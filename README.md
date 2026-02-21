@@ -1,7 +1,9 @@
 # CoPilot Packet Sniffer
 
 ## Project Description
-CoPilot Packet Sniffer is a powerful network packet analysis tool designed to capture and analyze network traffic in real-time. It provides users with the ability to inspect packets for debugging, troubleshooting, and learning purposes.
+This project is an **ethical packet sniffer** built with Python and Scapy.  
+It captures and analyzes **network packets** on your own machine or an instructor-provided lab environment, helping users learn about network protocols like **Ethernet, IP, TCP/UDP, DNS, and HTTP**.
+The sniffer is designed to be **safe for educational use**, with automatic redaction of sensitive information and fallback to PCAP mode if capture permissions are unavailable.
 
 ## Features
 - Real-time packet capturing
@@ -13,7 +15,6 @@ CoPilot Packet Sniffer is a powerful network packet analysis tool designed to ca
 ## Requirements
 - Python 3.6+
 - Scapy library (Python networking library)
-- Additional libraries: [list any additional dependencies required]
 
 ## Installation
 To install CoPilot Packet Sniffer, clone the repository and install the required dependencies:
@@ -23,23 +24,39 @@ git clone https://github.com/Bear123890/copilot-packet-sniffer.git
 cd copilot-packet-sniffer
 pip install -r requirements.txt
 ```
+Install Python dependencies:
+pip install scapy
 
-## Usage Examples
-To start the packet sniffer, run the following command:
+Run the sniffer (administrator/root privileges may be required for live capture):
+python packet_sniffer.py
 
-```bash
-python sniffer.py
-```
+## Ethics and Usage Policy
+This sniffer is for educational purposes only.
+Students may capture traffic only on their own machine (loopback interface lo or allowed local interfaces) or instructor-provided lab VMs/networks.
+Never capture traffic on other people’s networks or devices, bypass OS permissions, or hide activity.
 
-You can filter packets based on host, protocol, and port using command-line arguments:
+All output is redacted automatically, including:
 
-```bash
-python sniffer.py --filter 'tcp and port 80'
-```
+IP addresses → 192.168.1.xxx
 
-## Architecture
-The architecture of CoPilot Packet Sniffer includes several key components:
-- **Packet Capture Layer:** Handles real-time capturing of network packets using the Scapy library.
-- **Processing Layer:** Processes and filters captured packets based on user-defined criteria.
-- **User Interface:** A command-line or graphical interface for users to interact with the sniffer, view, and export data.
-- **Logging and Analysis:** Maintains logs for each session and provides analytical tools for traffic assessment.
+Emails → [REDACTED_EMAIL]
+
+Passwords, tokens, API keys, cookies, session identifiers
+
+## AI Use Policy
+Use Copilot for: Boilerplate code, CLI parsing, JSON formatting,Unit test scaffolds
+
+Do not ask Copilot for: Capturing “other people’s traffic”, Bypassing OS permissions, Stealth features, persistence, or hiding activity
+
+Always: Add interface/PCAP allowlist, Include redaction, Default to PCAP mode if capture privileges are missing
+
+## How the Sniffer Works
+
+1. Packet Capture:
+Capture live traffic from a specified interface (--interface) Or read packets from a .pcap file (--read-pcap) if permissions are unavailable
+
+2. Packet Decoding:
+ Ethernet → IP → TCP/UDP → HTTP/DNS, Displays HTTP request line, host, headers, DNS queries, and packet metadata
+
+ 3. Redaction:
+ Sensitive fields (IP addresses, emails, passwords, tokens, cookies) are masked automatically
