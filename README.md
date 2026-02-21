@@ -16,7 +16,11 @@ This project is a packet sniffer designed to capture and analyze network packets
 This tool should be used ethically and responsibly. Do not capture packets on networks without permission.
 
 # AI Use Policy
-The project may utilize AI tools to assist in analyzing data. Users should adhere to ethical guidelines when using AI-generated insights.
+Use Copilot for: Boilerplate code, CLI parsing,JSON formatting, Unit test scaffolds
+
+Do not ask Copilot for: Capturing “other people’s traffic”, Bypassing OS permissions, Stealth features, persistence, or hiding activity
+
+Always: Add interface/PCAP allowlist, Include redaction, Default to PCAP mode if capture privileges are missing
 
 # How the Sniffer Works
 The sniffer operates by capturing packets on the network interface and analyzing their header information. It classifies packets based on their protocols and provides insights into data flow.
