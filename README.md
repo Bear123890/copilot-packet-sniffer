@@ -20,7 +20,7 @@ The sniffer is designed to be **safe for educational use**, with automatic redac
 git clone https://github.com/<your-username>/copilot-packet-sniffer.git
 cd copilot-packet-sniffer
 
-Install Python dependencies:
+## Install Python dependencies:
 
 pip install scapy
 
